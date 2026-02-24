@@ -145,3 +145,9 @@ measurements.
 
 Applying tidy data principles to this kelp data set allowed for a
 reproducible and professional analysis.
+
+
+[View my Data Management Plan (DMP) here](https://dmp.lib.uct.ac.za/plans/8760/export?format=pdf&export%5Bform%5D=true&phase_id=All&export%5Bproject_details%5D=true&export%5Bquestion_headings%5D=true&export%5Bunanswered_questions%5D=true&export%5Bresearch_outputs%5D=true&export%5Bformatting%5D%5Bfont_face%5D=%22Times+New+Roman%22%2C+Times%2C+Serif&export%5Bformatting%5D%5Bfont_size%5D=10&export%5Bformatting%5D%5Bmargin%5D%5Btop%5D=25&export%5Bformatting%5D%5Bmargin%5D%5Bbottom%5D=20&export%5Bformatting%5D%5Bmargin%5D%5Bleft%5D=12&export%5Bformatting%5D%5BRIGHT%5D=12&button=)
+
+
+
