@@ -1,0 +1,177 @@
+---
+title: "just curious"
+author: "Reece and others"
+format: html
+editor: visual
+---
+
+loading packages
+
+```{r}
+library(tidyverse)
+```
+
+### Untidy Data
+
+To show the importance of the principles of tidy data, I began by combing through a deliberately frustrating dataset (SACTN_mangled.RData). These datasets contain some identical observations stored in different formats to show how structural issues affect analysis.
+
+---
+---
+title: "Data Wrangling and Tidy Data Project"
+author: "Reece Sinn Frantz"
+date: 23/02/26
+format: 
+  gfm:
+    code-fold: true
+    embed-resources: true
+    number-sections: true
+---
+
+## Introduction
+
+To show the importance of the principles of tidy data, I began by combing through a deliberately frustrating data set (SACTN_mangled.RData). The data set contains some identical observations stored in different formats to show how structural issues affect analysis.
+
+### Data
+
+The dataset used in this study is the (SACTN_mangled.RData) dataset from Smit,A.J from the university of the Western Cape, which contains daily air quality measurements in New York from May to September 1973. The dataset includes variables such as ozone levels, solar radiation, wind speed, and temperature.
+
+### Analysis
+
+The R script in the code chunk further explores the impact of temperature on ozone level. All analyses were done in R [@R2025].
+
+This is **bold** text. This is *italicised* text.
+
+```{r}
+
+```
+
+## Results
+
+The results show that air has quality (@fig-airquality).
+
+## Discussion
+
+We used R for the analyses [@R2017]. The results confirm that of Schlegel [-@Schlegel2017].
+
+---
+title: "Data Wrangling and Tidy Data Project"
+author: "Reece Sinn Frantz"
+date: 2026-02-23
+format: 
+  gfm:
+    code-fold: true
+    embed-resources: true
+    number-sections: true
+---
+
+## Introduction
+
+To show the importance of the principles of tidy data, I began by combing through a deliberately frustrating weather dataset. The data set contains observations where days are stored as columns (d1-d31) rather than rows, and temperature types (TMAX/TMIN) are stored as row observations rather than variables.
+
+### Data
+
+The dataset used in this study is a historical weather dataset for station MX17004. It contains daily temperature measurements (Max and Min) for the year 2010. The raw data is "untidy" because the column headers represent days of the month, which violates the principle that "each variable must have its own column."
+
+### Analysis
+
+in R [@R2025]. The R script below tidies the data using the `tidyverse` suite. The process involves pivoting the day columns into a single variable and then spreading the temperature elements into distinct columns for analysis. All analyses were done
+
+\`\`\`{r} #\| message: false #\| warning: false
+
+# Loading the 'Girl Squad' of R packages
+
+library(dplyr) \# To help us manipulate data library(tidyr) \# To keep everything tidy library(readr) \# To read our kelp file library(ggplot2) \# To make the professional pink/purple plots
+
+# STEP 1: Load the kelp data
+
+# R will look inside your 'data' folder for this file
+
+kelp_data \<- read_csv("data/kelp_data.csv")
+
+# STEP 2: Quick Clean
+
+# We make sure the 'site' column is treated as a category (factor)
+
+kelp_tidy \<- kelp_data %\>% mutate(site = as.factor(site))
+
+# STEP 3: Plot 1 - The Boxplot (Aesthetic Professional)
+
+# Comparing Stipe Length between sites
+
+ggplot(kelp_tidy, aes(x = site, y = stipe_length, fill = site)) + \# Adding a soft boxplot geom_boxplot(alpha = 0.7, outlier.shape = NA) + \# Adding 'jitter' so we can see the individual data points geom_jitter(width = 0.1, color = "black", alpha = 0.3) + \# Setting our Pink and Purple colors scale_fill_manual(values = c("Boulders Beach" = "#FF69B4", "Batsata Rock" = "#9370DB")) + theme_minimal() + labs( title = "Stipe Length: Boulders Beach vs. Batsata Rock", subtitle = "A comparison of kelp morphology", x = "Site Location", y = "Stipe Length (mm)" ) + theme(legend.position = "none")
+
+# STEP 4: Plot 2 - The Relationship (Aesthetic Professional)
+
+# Checking how Stipe Mass affects Frond Mass
+
+ggplot(kelp_tidy, aes(x = stipe_mass, y = frond_mass, color = site)) + geom_point(size = 3, alpha = 0.8) + \# Adding a clean trend line geom_smooth(method = "lm", se = FALSE) + \# Setting our Dark Pink and Deep Purple colors scale_color_manual(values = c("Boulders Beach" = "#FF1493", "Batsata Rock" = "#8A2BE2")) + theme_minimal() + labs( title = "Biomass Relationship", x = "Stipe Mass (g)", y = "Frond Mass (g)" )
+
+```{r}
+---
+title: "Data Wrangling and Tidy Data Project"
+author: "Reece Sinn Frantz"
+date: "2026-02-23"
+format: 
+  gfm:
+    code-fold: true
+---
+
+## Introduction
+
+To show the importance of the principles of tidy data, I began by combing through a deliberately frustrating "messy" dataset. In data science, we often encounter data where variables are trapped in column headers or observations are scattered. This project demonstrates the transformation of a raw biological dataset into a **tidy** format, making it ready for high-quality visualization.
+
+## Data
+
+The dataset used in this study consists of morphological measurements of *Macrocystis maxima* (Giant Kelp) collected from two sites in the Western Cape: **Boulders Beach** and **Batsata Rock**. The variables include stipe length, diameter, frond mass, and epiphyte length.
+
+## Analysis
+
+The R script below tidies the data using the `tidyverse` suite. The process involves ensuring each variable has its own column and each observation has its own row. All analyses were done in R.
+
+#| message: false
+#| warning: false
+
+# Loading our 'Girl Squad' of R packages
+library(dplyr)    
+library(tidyr)    
+library(readr)    
+library(ggplot2)  
+library(knitr)    # This makes our table look super clean
+
+# 1. Load the kelp data from our data folder
+kelp_data <- read_csv("data/kelp_data.csv")
+
+# 2. Convert to 'Long' Tidy Format (This matches your example!)
+# This takes the wide columns and stacks them into one 'measurement' column
+kelp_long <- kelp_data %>%
+  pivot_longer(
+    cols = c(stipe_length, stipe_diameter, frond_length, digits, 
+             primary_blade_width, primary_blade_length, stipe_mass, 
+             frond_mass, epiphyte_length),
+    names_to = "measurement", 
+    values_to = "value"
+  )
+
+# 3. Create the Tidy Table Output
+kable(head(kelp_long, 20), caption = "Table 1: Morphological Kelp Measurements in Tidy Format")
+
+# 4. Create Plot 1: Stipe Length Comparison (Pink and Purple)
+ggplot(kelp_data, aes(x = site, y = stipe_length, fill = site)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.1, color = "black", alpha = 0.3) +
+  scale_fill_manual(values = c("Boulders Beach" = "#FF69B4", "Batsata Rock" = "#9370DB")) +
+  theme_minimal() +
+  labs(title = "Stipe Length: Boulders Beach vs. Batsata Rock",
+       subtitle = "Aesthetic comparison of kelp morphology",
+       x = "Site", y = "Stipe Length (mm)") +
+  theme(legend.position = "none")
+
+# 5. Create Plot 2: Biomass Relationship (Darker Pink and Purple)
+ggplot(kelp_data, aes(x = stipe_mass, y = frond_mass, color = site)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("Boulders Beach" = "#FF1493", "Batsata Rock" = "#8A2BE2")) +
+  theme_minimal() +
+  labs(title = "Biomass Relationship",
+       x = "Stipe Mass (g)", y = "Frond Mass (g)")
+```

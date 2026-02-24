@@ -1,6 +1,1 @@
-install.packages(c(
-  "tidyverse",
-  "lubridate",
-  "here"
-))
-
+install.packages(c("tidyverse", "knitr", "rmarkdown", "quarto"))
