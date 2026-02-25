@@ -90,8 +90,7 @@ ggsave("plot2.png", p2, width = 8, height = 6)
 
 <div id="fig-kelp-plots-1">
 
-<img src="README_files/figure-commonmark/fig-kelp-plots-1.png"
-id="fig-kelp-plots-1" />
+<img src="plot1.png" id="fig-kelp-plots-1" />
 
 Figure 1
 
@@ -99,8 +98,7 @@ Figure 1
 
 <div id="fig-kelp-plots-2">
 
-<img src="README_files/figure-commonmark/fig-kelp-plots-2.png"
-id="fig-kelp-plots-2" />
+<img src="plot2.png" id="fig-kelp-plots-2" />
 
 Figure 2
 
